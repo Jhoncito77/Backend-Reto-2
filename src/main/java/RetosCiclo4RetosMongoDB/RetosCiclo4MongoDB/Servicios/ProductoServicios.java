@@ -25,6 +25,9 @@ public class ProductoServicios {
         return metodosCrud.listarProductos();
     }
     
+    public Optional<Producto> getProducto(String referencia){
+        return metodosCrud.getProducto(referencia);
+    }
         
     public Producto crearProducto(Producto producto){
         if(producto.getReference()==null){
@@ -83,5 +86,12 @@ public class ProductoServicios {
         return true;
         }).orElse(false);
         return borrar;
+    }
+    
+    public List<Producto>getByPrice(double price){
+        return metodosCrud.getByPrice(price);
+    }
+    public List<Producto>getByDescriptionContainingIgnoreCase(String description){
+        return metodosCrud.getByDescriptionContainingIgnoreCase(description);
     }
 }

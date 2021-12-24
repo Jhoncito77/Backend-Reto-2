@@ -25,6 +25,10 @@ public class UsuarioServicios {
         return metodosCrud.getUsuarios();
     }
     
+    public Optional<Usuario> getUsuario(int id){
+        return metodosCrud.getUsuario(id);
+    }
+    
     public boolean existeEmail(String email){
         return metodosCrud.validarPorEmail(email);
     }
@@ -100,5 +104,9 @@ public class UsuarioServicios {
             return true;
         }).orElse(false);
         return aBoolean;
+    }
+    
+    public List<Usuario>getByMonthBirthDay(String monthBirthDay){
+        return metodosCrud.getByMonthBirthtDay(monthBirthDay);
     }
 }

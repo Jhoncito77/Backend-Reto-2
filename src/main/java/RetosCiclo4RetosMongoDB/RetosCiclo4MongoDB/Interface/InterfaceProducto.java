@@ -6,6 +6,7 @@
 package RetosCiclo4RetosMongoDB.RetosCiclo4MongoDB.Interface;
 
 import RetosCiclo4RetosMongoDB.RetosCiclo4MongoDB.Modelo.Producto;
+import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
@@ -13,5 +14,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * @author 57300
  */
 public interface InterfaceProducto extends MongoRepository<Producto, String>{
-    
+    public List<Producto>findByPrice(double price);
+
+    public List<Producto>findByDescriptionContainingIgnoreCase(String description);
 }

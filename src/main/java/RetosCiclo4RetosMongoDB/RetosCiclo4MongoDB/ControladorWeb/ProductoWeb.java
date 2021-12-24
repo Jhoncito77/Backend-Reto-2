@@ -8,6 +8,7 @@ package RetosCiclo4RetosMongoDB.RetosCiclo4MongoDB.ControladorWeb;
 import RetosCiclo4RetosMongoDB.RetosCiclo4MongoDB.Modelo.Producto;
 import RetosCiclo4RetosMongoDB.RetosCiclo4MongoDB.Servicios.ProductoServicios;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -38,6 +39,10 @@ public class ProductoWeb {
     public List<Producto> listarProductos(){
         return servicios.listarProductos();
     }
+    @GetMapping("{referencia}")
+    public Optional<Producto> getProdcto(@PathVariable String referencia){
+        return servicios.getProducto(referencia);
+    }
     
     @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
@@ -55,5 +60,14 @@ public class ProductoWeb {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean borrarProducto(@PathVariable String reference){
         return servicios.deleteProducto(reference);
+    }
+    
+    @GetMapping("/price/{price}")
+    public List<Producto>getByPrice(@PathVariable("price")double price){
+        return servicios.getByPrice(price);
+    }
+    @GetMapping("/description/{description}")
+    public List<Producto>getByByDescriptionContainingIgnoreCase(@PathVariable("description") String description){
+        return servicios.getByDescriptionContainingIgnoreCase(description);
     }
 }
