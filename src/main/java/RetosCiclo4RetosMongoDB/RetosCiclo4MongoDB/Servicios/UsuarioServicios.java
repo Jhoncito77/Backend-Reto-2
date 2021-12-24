@@ -19,20 +19,39 @@ import org.springframework.stereotype.Service;
 @Service
 public class UsuarioServicios {
     @Autowired
+    /**
+     * Instancia del repositorio
+     */
     private Usuariorepositorio metodosCrud;
-    
+    /**
+     * metodo para traer a todos los usuarios
+     * @return 
+     */
     public List<Usuario> getAll(){
         return metodosCrud.getUsuarios();
     }
-    
+    /**
+     * metodo para traer un usuario por id
+     * @param id
+     * @return 
+     */
     public Optional<Usuario> getUsuario(int id){
         return metodosCrud.getUsuario(id);
     }
-    
+    /**
+     * metodo para validar si un email existe en la BD
+     * @param email
+     * @return 
+     */
     public boolean existeEmail(String email){
         return metodosCrud.validarPorEmail(email);
     }
-    
+    /**
+     * Metodo usado para autenticar usuario por email y password
+     * @param email
+     * @param Password
+     * @return 
+     */
     public Usuario autenticarUsuario(String email, String Password){
         Optional<Usuario> usuario = metodosCrud.validarEmailAndPassword(email, Password);
         if(usuario.isPresent()){
@@ -41,7 +60,11 @@ public class UsuarioServicios {
             return new Usuario();
         }
     }
-    
+    /**
+     * Metodo usado para guardar un nuevo usuario
+     * @param usuario
+     * @return 
+     */
     public Usuario guardarUsuario(Usuario usuario){
         if(usuario.getId()==null){
             return usuario;
@@ -57,7 +80,11 @@ public class UsuarioServicios {
         }
         return usuario;
     }
-    
+    /**
+     * Metodo  usado para editar un usuario
+     * @param usuario
+     * @return 
+     */
     public Usuario update(Usuario usuario){
         if(usuario.getId()!= null){
             Optional<Usuario> auxUsuario = metodosCrud.getUsuario(usuario.getId());
@@ -97,7 +124,11 @@ public class UsuarioServicios {
         }
         
     }
-    
+    /**
+     * metodo usado para borrar un usuario
+     * @param id
+     * @return 
+     */
     public boolean deleteUsuario(int id) {
         Boolean aBoolean = metodosCrud.getUsuario(id).map(usuario -> {
             metodosCrud.deleteUsuario(usuario);
@@ -105,7 +136,11 @@ public class UsuarioServicios {
         }).orElse(false);
         return aBoolean;
     }
-    
+    /**
+     * Metodo usado para traer cumpleaños de usuarios por meses
+     * @param monthBirthDay
+     * @return 
+     */
     public List<Usuario>getByMonthBirthDay(String monthBirthDay){
         return metodosCrud.getByMonthBirthtDay(monthBirthDay);
     }
